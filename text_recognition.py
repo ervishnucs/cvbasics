@@ -3,7 +3,7 @@ import pytesseract
 
 try:
     # read image
-    im = cv2.imread('./testimg.jpg')
+    im = cv2.imread('upscale-text-image-1.jpg')
     if im is None:
         raise FileNotFoundError("The image file 'testimg.jpg' was not found.")
     print("Image loaded successfully.")
