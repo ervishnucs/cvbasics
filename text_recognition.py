@@ -5,7 +5,7 @@ try:
     # read image
     im = cv2.imread('upscale-text-image-1.jpg')
     if im is None:
-        raise FileNotFoundError("The image file 'testimg.jpg' was not found.")
+        raise FileNotFoundError("The image file 'upscale-text-image-1.jpg' was not found.")
     print("Image loaded successfully.")
 
     # configurations
