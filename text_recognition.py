@@ -1,25 +1,24 @@
 import cv2
 import pytesseract
+from PIL import Image
 
-try:
-    # read image
-    im = cv2.imread('upscale-text-image-1.jpg')
-    if im is None:
-        raise FileNotFoundError("The image file 'upscale-text-image-1.jpg' was not found.")
-    print("Image loaded successfully.")
+# read image
+im = cv2.imread('upscale-text-image-1.jpg')
 
-    # configurations
-    config = ('-l eng --oem 1 --psm 3')
+# convert the image from BGR (OpenCV format) to RGB (PIL format)
+im_rgb = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
 
-    # pytesseract
-    text = pytesseract.image_to_string(im, config=config)
-    print("Text recognition applied successfully.")
+# convert the numpy array to a PIL image
+pil_image = Image.fromarray(im_rgb)
 
-    # save text
-    with open('output.txt', 'w') as f:
-        f.write(text)
-    print("Text saved successfully.")
+# configurations
+config = ('-l eng --oem 1 --psm 3')
 
-except Exception as e:
-    print(f"An error occurred: {e}")
-    raise
+# pytesseract
+text = pytesseract.image_to_string(pil_image, config=config)
+
+# print and save text
+with open('output.txt', 'w') as f:
+    f.write(text)
+
+print(text)
