@@ -26,3 +26,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libgl1-mesa-glx  # Required for OpenCV
         python image_processing.py
+
+    - name: Upload logs
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: logs
+        path: image_processing.py
+
+    - name: Upload result
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: processed-image
+        path: dancing-spider-canny.png
