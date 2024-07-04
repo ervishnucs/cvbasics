@@ -1,17 +1,25 @@
 import cv2
 import pytesseract
 
-# read image
-im = cv2.imread('./testimg.jpg')
+try:
+    # read image
+    im = cv2.imread('./testimg.jpg')
+    if im is None:
+        raise FileNotFoundError("The image file 'testimg.jpg' was not found.")
+    print("Image loaded successfully.")
 
-# configurations
-config = ('-l eng --oem 1 --psm 3')
+    # configurations
+    config = ('-l eng --oem 1 --psm 3')
 
-# pytesseract
-text = pytesseract.image_to_string(im, config=config)
+    # pytesseract
+    text = pytesseract.image_to_string(im, config=config)
+    print("Text recognition applied successfully.")
 
-# print and save text
-with open('output.txt', 'w') as f:
-    f.write(text)
+    # save text
+    with open('output.txt', 'w') as f:
+        f.write(text)
+    print("Text saved successfully.")
 
-print(text)
+except Exception as e:
+    print(f"An error occurred: {e}")
+    raise
